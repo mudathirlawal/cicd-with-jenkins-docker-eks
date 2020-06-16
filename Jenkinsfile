@@ -48,7 +48,7 @@ pipeline {
                 sh 'echo "STAGE 5: Deploying app image to AWS EKS ..."'
                 sh "kubectl expose deploy/nginx \
                     --port=80 \
-                    --target-port=8080 \ 
+                    --target-port=8080   
                     --type=LoadBalancer \
                     --name=capstone-app"
                 sh "kubectl create deployment nginx --image=nginx:latest"
