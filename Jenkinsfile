@@ -17,10 +17,12 @@ pipeline {
         } 
         stage( 'Push Docker image to dockerhub repository' ) {
             steps {
-                sh 'echo "STAGE 3: Uploading Docker image to dockerhub repository ..."'
-                sh "sudo docker login"
-                sh "sudo docker tag nigercode/web-app:v1.0 nigercode/web-app:V1.0"
-                sh "sudo docker push nigercode/web-app:v1.0"
+                withDockerRegistry([url: "", credentialsId: "dockerhub"]) {
+                    sh 'echo "STAGE 3: Uploading Docker image to dockerhub repository ..."'
+                    sh "sudo docker login"
+                    sh "sudo docker tag nigercode/web-app:v1.0 nigercode/web-app:v1.0"
+                    sh "sudo docker push nigercode/web-app:v1.0"
+                    }
                 }
             }
         }                               
@@ -29,7 +31,7 @@ pipeline {
                 withAWS( region:'us-west-2', credentials:'capstone' ) {
                 sh 'echo "STAGE 4: Creating a Kubernetes cluster on AWS EKS ..."'
                 sh "eksctl create cluster \
-                    --name capstone-app \
+                    --name capstone \
                     --version 1.16 \
                     --nodegroup-name standard-workers \
                     --node-type t2.medium \
@@ -45,16 +47,12 @@ pipeline {
         stage( 'Deploy Docker image to AWS Elastic Kubernetes Service cluster' ) {
             steps {
                 withAWS( region:'us-west-2', credentials:'capstone' ) {
-                sh 'echo "STAGE 5: Deploying app image to AWS EKS ..."'
-                sh "kubectl expose deploy/nginx \
-                    --port=80 \
-                    --target-port=8080   
-                    --type=LoadBalancer \
-                    --name=capstone-app"
-                sh "kubectl create deployment nginx --image=nginx:latest"
-                sh "kubectl scale deployment/nginx --replicas=4"
+                sh "kubectl apply -f deployment.yml"
+                sh "kubectl scale deployment/nigercode/web-app --replicas=4"
+                sh "kubectl get deployments"
+                sh "kubectl get services/nigercode/web-app"
                 sh 'echo "Congratulations! Deployment successful."'
-                sh "kubectl decribe deployment/nginx"
+                sh "kubectl decribe deployment/nigercode/web-app"
                 }
             }
         }               
