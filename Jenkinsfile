@@ -18,39 +18,27 @@ pipeline {
         stage( 'Push Docker image to dockerhub repository' ) {
             steps {
                 withDockerRegistry([url: "", credentialsId: "dockerhub"]) {
-                    sh 'echo "STAGE 3: Uploading Docker image to dockerhub repository ..."'
+                    sh 'echo "STAGE 3: Uploading docker image to dockerhub repository ..."'
                     sh "sudo docker login"
                     sh "sudo docker tag nigercode/web-app:v1.0 nigercode/web-app:v1.0"
                     sh "sudo docker push nigercode/web-app:v1.0"
                     }
                 }
             }
-        }                               
-        stage( 'Create a Kubernetes cluster on AWS EKS' ) {
-            steps {
-                withAWS( region:'us-west-2', credentials:'capstone' ) {
-                sh 'echo "STAGE 4: Creating a Kubernetes cluster on AWS EKS ..."'
-                sh "eksctl create cluster \
-                    --name capstone \
-                    --version 1.16 \
-                    --nodegroup-name standard-workers \
-                    --node-type t2.medium \
-                    --nodes 3 \
-                    --nodes-min 1 \
-                    --nodes-max 4 \
-                    --node-ami auto \
-                    --region us-west-2" 
-                sh "aws eks list-clusters --region=us-west-2 --output=json"
-                }
-            }
-        }    
+        }                                   
         stage( 'Deploy Docker image to AWS Elastic Kubernetes Service cluster' ) {
             steps {
                 withAWS( region:'us-west-2', credentials:'capstone' ) {
-                sh "kubectl apply -f deployment.yml"
+                sh 'echo "STAGE 4: Deploying docker image to AWS ..."'                    
+                sh "aws eks --region us-west-2 update-kubeconfig --name capstone"
+                sh "kubectl config use-context arn:/capstone"
+                sh "kubectl set image deployments/web-app web-app=nigercode/web-app:v1.0"
+                sh "kubectl apply -f deployment/deployment.yml"
                 sh "kubectl scale deployment/nigercode/web-app --replicas=4"
-                sh "kubectl get deployments"
-                sh "kubectl get services/nigercode/web-app"
+                sh "kubectl get nodes"
+                sh "kubectl get deployment"
+                sh "kubectl get pod -o wide"
+                sh "kubectl get services/web-app"
                 sh 'echo "Congratulations! Deployment successful."'
                 sh "kubectl decribe deployment/nigercode/web-app"
                 }
