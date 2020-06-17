@@ -42,5 +42,3 @@
           targetPort: 80
           nodePort: 8086
           protocol: TCP    
-
-          
