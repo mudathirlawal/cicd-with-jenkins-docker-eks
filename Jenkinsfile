@@ -6,9 +6,8 @@ pipeline {
             steps {
                 sh 'echo "STAGE 0: Cloning app code from SCM ..."'
                 git 'https://github.com/mudathirlawal/cicd-with-jenkins-docker-and-aws-eks.git'
-        }
-    }
-    stages {
+            }    
+        }        
         stage('Lint all app code') {
             steps {
                 sh 'echo "STAGE 1: Checking app code for syntax error ..."'
