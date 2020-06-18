@@ -1,7 +1,9 @@
 
 FROM nginx:latest
 
-COPY index.html /usr/nginx/html
+WORKDIR /nginx
+
+COPY . /nginx
 
 RUN usermod -a -G docker jenkins
 

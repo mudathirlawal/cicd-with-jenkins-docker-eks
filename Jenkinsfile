@@ -17,7 +17,7 @@ pipeline {
         stage( 'Build docker image for app' ) {
             steps {
                 sh 'echo "STAGE 2: Building and tagging docker image ..."'
-                sh 'sudo docker build -t nigercode/web-app:v1.0 .'
+                sh 'sudo docker build -t web-app:v1.0 .'
                 sh 'sudo docker image ls'                  
             }
         } 
