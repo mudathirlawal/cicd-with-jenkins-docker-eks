@@ -17,17 +17,17 @@ pipeline {
         stage( 'Build docker image for app' ) {
             steps {
                 sh 'echo "STAGE 2: Building and tagging docker image ..."'
-                sh 'sudo docker build -t web-app:v1.0 .'
-                sh 'sudo docker image ls'                  
+                sh 'docker build -t web-app:v1.0 .'
+                sh 'docker image ls'                  
             }
         } 
         stage( 'Push image to dockerhub repo' ) {
             steps {
                 withDockerRegistry([url: "", credentialsId: "dockerhub"]) {
                     sh 'echo "STAGE 3: Uploading image to dockerhub repository ..."'
-                    sh 'sudo docker login -u nigercode'
-                    sh 'sudo docker tag nigercode/web-app:v1.0 nigercode/web-app:v1.0'
-                    sh 'sudo docker push nigercode/web-app:v1.0'          
+                    sh 'docker login -u nigercode'
+                    sh 'docker tag nigercode/web-app:v1.0 nigercode/web-app:v1.0'
+                    sh 'docker push nigercode/web-app:v1.0'          
                 }
             }
         }                                   
