@@ -17,7 +17,7 @@ pipeline {
         stage( 'Build docker image for app' ) {
             steps {
                 sh 'echo "STAGE 2: Building and tagging docker image ..."'
-                sh 'docker build -t web-app .'
+                sh 'docker build -t web-app:v1.0 .'
                 sh 'docker image ls'                  
             }
         } 
@@ -26,7 +26,7 @@ pipeline {
                 withDockerRegistry([url: "", credentialsId: "dockerhub"]) {
                     sh 'echo "STAGE 3: Uploading image to dockerhub repository ..."'
                     sh 'docker login'
-                    sh 'docker tag web-app nigercode/web-app:v1.0'
+                    sh 'docker tag web-app:v1.0 nigercode/web-app:v1.0'
                     sh 'docker push nigercode/web-app:v1.0'          
                 }
             }
@@ -36,7 +36,7 @@ pipeline {
                 withAWS( region:'us-west-2', credentials:'capstone' ) {
                     sh 'echo "STAGE 4: Deploying image to AWS EKS cluster ..."'
                     sh 'aws eks --region us-west-2 update-kubeconfig --name capstone'            
-                    sh 'kubectl set image deployments/web-app web-app=nigercode/web-app:v1.0'
+                    sh 'kubectl set image deployment web-app=nigercode/web-app:v1.0 --all'
                     sh 'kubectl apply -f deployment/deployment.yml'
                     sh 'kubectl get nodes'
                     sh 'kubectl get deployment'
