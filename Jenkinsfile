@@ -37,7 +37,7 @@ pipeline {
                     sh 'echo "STAGE 4: Deploying image to AWS EKS cluster ..."'
                     sh 'aws eks --region us-west-2 update-kubeconfig --name capstone'            
                     sh 'kubectl set image deployment web-app=nigercode/web-app:v1.0 --all'
-                    sh 'kubectl apply -f deployment/deployment.yml'
+                    sh 'kubectl apply -f templates/deployment.yml'
                     sh 'kubectl get nodes'
                     sh 'kubectl get deployment'
                     sh 'kubectl get pod -o wide'
