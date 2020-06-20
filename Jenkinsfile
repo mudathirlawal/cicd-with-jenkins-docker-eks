@@ -34,16 +34,18 @@ pipeline {
         stage( 'Deploy image to AWS EKS' ) {
             steps {
                 withAWS( region:'us-west-2', credentials:'capstone' ) {
-                    sh 'echo "STAGE 4: Deploying image to AWS EKS cluster ..."'
-                    sh 'aws eks --region us-west-2 update-kubeconfig --name capstone'            
-                    sh 'kubectl set image deployment web-app=nigercode/web-app:v1.0 --all'
-                    sh 'kubectl apply -f templates/deployment.yml'
-                    sh 'kubectl get nodes'
-                    sh 'kubectl get deployment'
-                    sh 'kubectl get pod -o wide'
-                    sh 'kubectl get services/web-app'
-                    sh 'echo "Congratulations! Deployment successful."'
-                    sh 'kubectl decribe deployment/nigercode/web-app'
+                    sh '''
+                        echo "STAGE 4: Deploying image to AWS EKS cluster ..."
+                        aws eks --region us-west-2 update-kubeconfig --name capstone            
+                        kubectl set image deployment web-app=nigercode/web-app:v1.0 --all
+                        kubectl apply -f templates/deployment.yml
+                        kubectl get nodes
+                        kubectl get deployment
+                        kubectl get pod -o wide
+                        kubectl get service/web-app
+                        echo "Congratulations! Deployment successful."
+                        kubectl decribe deployment/nigercode/web-app
+                    '''
                 }
             }
         }               
