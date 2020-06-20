@@ -39,6 +39,7 @@ pipeline {
                         aws eks --region us-west-2 update-kubeconfig --name capstone            
                         kubectl set image deployment web-app=nigercode/web-app:v1.0 --all
                         kubectl apply -f templates/deployment.yml
+                        kubectl apply -f templates/loadbalancer.yml
                         kubectl get nodes
                         kubectl get deployment
                         kubectl get pod -o wide
