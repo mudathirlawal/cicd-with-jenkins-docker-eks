@@ -4,9 +4,9 @@
   DevOps Project: Udacity Cloud DevOps Engineer Nanodegree Capstone Project
 
 # For Udacity Reviewers:
-  Below is the details of the service I created:
+  Below is the external IP of the service I created:
 
-  LOADBALANCER EXTERNAL_IP:                                                             
+  LOAD_BALANCER EXTERNAL_IP:                                                             
   abb33ae6a970c4529b28ddb178408210-462912395.us-west-2.elb.amazonaws.com
 
 # Project Instructions:
