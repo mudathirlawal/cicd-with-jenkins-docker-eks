@@ -39,5 +39,5 @@
       app: 
         ports:
         - port: 80
-            targetPort: 80
+            targetPort: 8086
             protocol: TCP 
