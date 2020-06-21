@@ -11,7 +11,7 @@ WORKDIR /nginx
 
 ## Step 3:
 # Copy source code to working directory
-COPY . index.html /nginx/
+COPY index.html /nginx/
 
 ## Step 4:
 # Expose port 80
