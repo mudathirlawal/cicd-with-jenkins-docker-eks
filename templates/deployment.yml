@@ -4,7 +4,7 @@
         name: web-app
         labels:
           app: web-app
-      namespace: default
+        namespace: default
       spec:
         replicas: 3
         selector:
@@ -28,7 +28,7 @@
                 - containerPort: 80    
                 
       # ---
-      # apiVersion:v1
+      # apiVersion: v1
       # kind: Service
       # metadata:
       #   name: web-app
