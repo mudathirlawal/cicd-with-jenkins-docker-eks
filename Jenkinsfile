@@ -41,7 +41,7 @@ pipeline {
                     sh 'kubectl apply -f templates/deployment.yml'
                     sh 'kubectl apply -f templates/loadbalancer.yml'
                     sh 'kubectl apply -f templates/aws-auth-cm.yml'
-                    sh 'kubectl get nodes'
+                    sh 'kubectl get nodes --all-namespaces'
                     sh 'kubectl get deployment'
                     sh 'kubectl get pod -o wide'
                     sh 'kubectl get service/web-app'
