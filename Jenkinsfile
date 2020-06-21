@@ -37,16 +37,17 @@ pipeline {
                     sh 'echo "STAGE 4: Deploying image to AWS EKS cluster ..."'
                     sh 'aws eks --region us-west-2 update-kubeconfig --name capstone'
                     sh 'kubectl config use-context arn:aws:eks:us-west-2:428819381342:cluster/capstone'            
-                    sh 'kubectl set image deployment web-app=nigercode/web-app:v1.0 --all'
+                    sh 'kubectl set image deployment nginx nginx=nigercode/web-app:v1.0'
+                    sh 'kubectl rollout status deployment nginx'
                     sh 'kubectl apply -f templates/deployment.yml'
                     sh 'kubectl apply -f templates/loadbalancer.yml'
                     sh 'kubectl apply -f templates/aws-auth-cm.yml'
                     sh 'kubectl get nodes --all-namespaces'
                     sh 'kubectl get deployment'
                     sh 'kubectl get pod -o wide'
-                    sh 'kubectl get service/web-app'
+                    sh 'kubectl get service/nginx'
                     sh 'echo "Congratulations! Deployment successful."'
-                    sh 'kubectl describe deployment/web-app'
+                    sh 'kubectl describe deployment/nginx'
                 }
             }
         }               
