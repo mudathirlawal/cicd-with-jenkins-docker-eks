@@ -18,13 +18,13 @@
           metadata:
             labels:
               app: web-app
-        spec:
-          containers:
-            - image: "nigercode/web-app:v1.0"
-              imagePullPolicy: Always
-              name: web-app
-              ports:
-                - containerPort: 80    
+          spec:
+            containers:
+              - image: "nigercode/web-app:v1.0"
+                imagePullPolicy: Always
+                name: web-app
+                ports:
+                  - containerPort: 80    
    
       # ---
       # apiVersion: v1
