@@ -31,8 +31,6 @@
     kind: Service
     metadata:
       name: web-app
-      labels:
-      app: web-app
     spec:
       type: LoadBalancer
       selector:
