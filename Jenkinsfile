@@ -45,7 +45,7 @@ pipeline {
                     sh 'kubectl get pod -o wide'
                     sh 'kubectl get service/web-app'
                     sh 'echo "Congratulations! Deployment successful."'
-                    sh 'kubectl decribe deployment/nigercode/web-app'
+                    sh 'kubectl describe deployment/nigercode/web-app'
                 }
             }
         }               
