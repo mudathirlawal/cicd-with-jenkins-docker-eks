@@ -7,11 +7,11 @@ RUN rm /usr/share/nginx/html/index.html
 
 ## Step 2:
 # Create a working directory
-WORKDIR /nginx
+WORKDIR /usr/share/nginx/html
 
 ## Step 3:
 # Copy source code to working directory
-COPY index.html /nginx/
+COPY index.html /usr/share/nginx/html
 
 ## Step 4:
 # Expose port 80

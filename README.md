@@ -2,7 +2,13 @@
 
 # CI/CD with Jenkins, Docker, and AWS EKS
   DevOps Project: Udacity Cloud DevOps Engineer Nanodegree Capstone Project
-  
+
+# For Udacity Reviewer:
+Below is the details of the service I created:
+
+NAME      TYPE           CLUSTER-IP      EXTERNAL-IP                                                             
+web-app   LoadBalancer   10.100.147.84   abb33ae6a970c4529b28ddb178408210-462912395.us-west-2.elb.amazonaws.com
+
 # Project Instructions:
   
 In this project you will apply the skills and knowledge which were developed throughout the Cloud DevOps Nanodegree program. These include:
