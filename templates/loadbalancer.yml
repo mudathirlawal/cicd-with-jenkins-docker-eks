@@ -9,9 +9,9 @@ spec:
   selector:
     matchLabels:
       app: nigercode/web-app:v1.0
-        ports:
-        - port: 80
-          targetPort: 80
-          nodePort: 8086
-          protocol: TCP
+  ports:
+  - port: 80
+    targetPort: 80
+    nodePort: 8086
+    protocol: TCP
           
