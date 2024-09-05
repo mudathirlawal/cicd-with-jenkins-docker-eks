@@ -1,9 +1,7 @@
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/9b22fa10953040debe27c1861661e187)](https://www.codacy.com/manual/mudathirlawal/cicd-with-jenkins-docker-and-aws-eks?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=mudathirlawal/cicd-with-jenkins-docker-and-aws-eks&amp;utm_campaign=Badge_Grade)
 
 # CI/CD with Jenkins, Docker, and AWS EKS
-  
-   Project Instructions:
-    
+
   In this project you will apply the skills and knowledge which were developed throughout the Cloud DevOps Nanodegree program. These include:
 
   Working in AWS
