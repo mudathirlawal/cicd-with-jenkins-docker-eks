@@ -2,7 +2,7 @@
 
 # CI/CD with Jenkins, Docker, and AWS EKS
 
-  In this project you will apply the skills and knowledge which were developed throughout the Cloud DevOps Nanodegree program. These include:
+  In this project you will apply the following skills and knowledge:
 
   Working in AWS
   Using Jenkins to implement Continuous Integration and Continuous Deployment
