@@ -2,7 +2,7 @@
 
 # CI/CD with Jenkins, Docker, and AWS EKS
 
-  In this project you will apply the following skills and knowledge:
+  In this project I applied the following skills and knowledge:
 
   Working in AWS
   Using Jenkins to implement Continuous Integration and Continuous Deployment
